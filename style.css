@@ -1,0 +1,9 @@
+body {
+  background-color: #121212;
+  color: #ffffff;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.logo {
+  max-width: 150px;
+}
