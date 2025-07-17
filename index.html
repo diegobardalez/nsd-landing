@@ -7,13 +7,13 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body class="bg-dark text-light">
   <div class="container text-center mt-5">
     <img src="assets/logo.png" alt="NSD Logo" class="logo mb-4">
     <h1 class="text-light">Nuevo Sol Digital (NSD)</h1>
     <p class="text-secondary">La nueva moneda digital peruana basada en BNB Smart Chain.</p>
 
-    <div class="bg-dark p-3 rounded text-light mt-4">
+    <div class="bg-dark p-3 rounded text-light mt-4 border border-secondary">
       <p><strong>Dirección del contrato:</strong></p>
       <code>0x4044e67364cefbdbc9224275e28b9aa2301a5807</code>
       <p><strong>Red:</strong> Binance Smart Chain</p>
@@ -22,8 +22,37 @@
 
     <div class="mt-4">
       <a href="https://pancakeswap.finance" class="btn btn-warning me-2">Comprar en PancakeSwap</a>
-      <a href="https://bscscan.com/token/0x4044e67364cefbbdc9224275e28b9aa2301a5807" class="btn btn-outline-light">Ver en BscScan</a>
+      <a href="https://bscscan.com/token/0x4044e67364cefbdbc9224275e28b9aa2301a5807" class="btn btn-outline-light me-2">Ver en BscScan</a>
+      <button class="btn btn-success" onclick="addToken()">Agregar a MetaMask</button>
     </div>
   </div>
+
+  <script>
+    async function addToken() {
+      try {
+        const wasAdded = await window.ethereum.request({
+          method: 'wallet_watchAsset',
+          params: {
+            type: 'ERC20',
+            options: {
+              address: '0x4044e67364cefbdbc9224275e28b9aa2301a5807',
+              symbol: 'NSD',
+              decimals: 18,
+              image: 'https://diegobardalez.github.io/nsd-landing/assets/logo.png' // usa aquí una URL directa y accesible
+            },
+          },
+        });
+
+        if (wasAdded) {
+          alert('¡NSD fue agregado a MetaMask!');
+        } else {
+          alert('No se agregó el token.');
+        }
+      } catch (error) {
+        console.error(error);
+        alert('Error al intentar agregar el token.');
+      }
+    }
+  </script>
 </body>
 </html>
